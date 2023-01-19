@@ -1,20 +1,19 @@
 
 function app(people) {
-    DisplayWelcome();
-    RunSearchAndMenu(people);
-    return ExitOrRestart(people);
+    displayWelcome();
+    runSearchAndMenu(people);
+    return exitOrRestart(people);
 }
 
-function DisplayWelcome() {
+function displayWelcome() {
     alert('Hello and welcome to the Most Wanted search application!');
 }
 
-function RunSearchAndMenu(people) {
-    const searchResults = SearchPeopleDataSet(people);
+function runSearchAndMenu(people) {
+    const searchResults = searchPeopleDataSet(people);
 
     if (searchResults.length > 1) {
-        //! TODO
-        // DisplayPeople(searchResults)
+        DisplayPeople('Search Results', searchResults);
     }
     else if (searchResults.length === 1) {
         const person = searchResults[0];
@@ -25,7 +24,7 @@ function RunSearchAndMenu(people) {
     }
 }
 
-function SearchPeopleDataSet(people) {
+function searchPeopleDataSet(people) {
 
     const searchTypeChoice = validatedPrompt(
         'Please enter in what type of search you would like to perform.',
@@ -45,7 +44,7 @@ function SearchPeopleDataSet(people) {
             // results = searchByTraits(people);
             break;
         default:
-            return SearchPeopleDataSet(people);
+            return searchPeopleDataSet(people);
     }
 
     return results;
@@ -80,12 +79,12 @@ function mainMenu(person, people) {
         case "family":
             //! TODO
             // let personFamily = findPersonFamily(person, people);
-            // DisplayPeople(personFamily);
+            // displayPeople('Family', personFamily);
             break;
         case "descendants":
             //! TODO
             // let personDescendants = findPersonDescendants(person, people);
-            // DisplayPeople(personDescendants);
+            // displayPeople('Descendants', personDescendants);
             break;
         case "quit":
             return;
@@ -96,10 +95,15 @@ function mainMenu(person, people) {
     return mainMenu(person, people);
 }
 
+function displayPeople(displayTitle, peopleToDisplay) {
+    const formatedPeopleDisplayText = peopleToDisplay.map(person => `${person.firstName} ${person.lastName}`).join('\n');
+    alert(`${displayTitle}\n\n${formatedPeopleDisplayText}`);
+}
+
 function validatedPrompt(message, acceptableAnswers) {
     acceptableAnswers = acceptableAnswers.map(aa => aa.toLowerCase());
 
-    const builtPromptWithAcceptableAnswers = `${message} \nAcceptable Answers: ${acceptableAnswers.map((aa, index) => `\n-> ${aa}`).join('')}`
+    const builtPromptWithAcceptableAnswers = `${message} \nAcceptable Answers: ${acceptableAnswers.map((aa, index) => `\n-> ${aa}`).join('')}`;
 
     const userResponse = prompt(builtPromptWithAcceptableAnswers).toLowerCase();
 
@@ -112,7 +116,7 @@ function validatedPrompt(message, acceptableAnswers) {
     }
 }
 
-function ExitOrRestart(people) {
+function exitOrRestart(people) {
     const userExitOrRestartChoice = validatedPrompt(
         'Would you like to exit or restart?',
         ['exit', 'restart']
@@ -125,7 +129,7 @@ function ExitOrRestart(people) {
             return app(people);
         default:
             alert('Invalid input. Please try again.');
-            return ExitOrRestart(people);
+            return exitOrRestart(people);
     }
 
 }
