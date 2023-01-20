@@ -103,7 +103,7 @@ function displayPeople(displayTitle, peopleToDisplay) {
 function validatedPrompt(message, acceptableAnswers) {
     acceptableAnswers = acceptableAnswers.map(aa => aa.toLowerCase());
 
-    const builtPromptWithAcceptableAnswers = `${message} \nAcceptable Answers: ${acceptableAnswers.map((aa, index) => `\n-> ${aa}`).join('')}`;
+    const builtPromptWithAcceptableAnswers = `${message} \nAcceptable Answers: ${acceptableAnswers.map(aa => `\n-> ${aa}`).join('')}`;
 
     const userResponse = prompt(builtPromptWithAcceptableAnswers).toLowerCase();
 
@@ -111,7 +111,7 @@ function validatedPrompt(message, acceptableAnswers) {
         return userResponse;
     }
     else {
-        alert(`"${userResponse}" is not an acceptable response. The acceptable responses include:\n${acceptableAnswers.map((aa, index) => `\n-> ${aa}`).join('')} \n\nPlease try again.`);
+        alert(`"${userResponse}" is not an acceptable response. The acceptable responses include:\n${acceptableAnswers.map(aa => `\n-> ${aa}`).join('')} \n\nPlease try again.`);
         return validatedPrompt(message, acceptableAnswers);
     }
 }
