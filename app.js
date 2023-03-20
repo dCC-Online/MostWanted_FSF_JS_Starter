@@ -59,7 +59,7 @@ function searchById(people) {
 
 function searchByName(people) {
     const firstNameToSearchFor = prompt('Please enter the the first name of the person you are searching for.');
-    const lastNameToSearchFor = prompt('Please enter the the first name of the person you are searching for.');
+    const lastNameToSearchFor = prompt('Please enter the the last name of the person you are searching for.');
     const fullNameSearchResults = people.filter(person => (person.firstName.toLowerCase() === firstNameToSearchFor.toLowerCase() && person.lastName.toLowerCase() === lastNameToSearchFor.toLowerCase()));
     return fullNameSearchResults;
 }
